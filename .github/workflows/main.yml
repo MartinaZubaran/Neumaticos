@@ -1,21 +1,29 @@
-name: Ejecutar Script
+name: Ejecutar Script de Neumáticos
 
 on:
   schedule:
-    - cron: "0 10 * * 2,4"
+    - cron: "0 10 * * 2,4" # Martes y jueves a las 10:00 AM UTC
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
     steps:
+      # Paso 1: Clonar el repositorio
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
+      # Paso 2: Configurar Python
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
+      # Paso 3: Instalar dependencias
+      - name: Instalar dependencias
+        run: |
+          pip install requests pandas beautifulsoup4
+
+      # Paso 4: Ejecutar el script
       - name: Ejecutar script
         run: |
-          python neumaticos (1).ipynb
+          python "neumaticos (1).ipynb"
